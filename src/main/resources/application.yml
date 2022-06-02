@@ -1,0 +1,11 @@
+cloud:
+  aws:
+    custom:
+      bucket-name:
+    region:
+      static:
+      auto: false
+    credentials:
+      access-key:
+      secret-key:
+      profile-name: stratospheric
