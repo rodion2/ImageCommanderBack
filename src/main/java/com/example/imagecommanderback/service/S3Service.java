@@ -24,7 +24,7 @@ public interface S3Service {
      * @return - upload result.
      * @throws IOException
      */
-    UploadResult putS3Object(MultipartFile file) throws IOException;
+    UploadResult putS3Object(MultipartFile file);
 
     /**
      * Gets s3ObjectContent from s3 bucket.

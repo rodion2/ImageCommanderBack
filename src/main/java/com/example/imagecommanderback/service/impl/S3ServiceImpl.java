@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -45,7 +46,7 @@ public class S3ServiceImpl implements S3Service {
     }
 
     @Override
-    public UploadResult putS3Object(MultipartFile multipartFile) throws IOException {
+    public UploadResult putS3Object(MultipartFile multipartFile) {
         if (multipartFile.isEmpty()) {
             throw new IllegalArgumentException("Provided file is empty");
         }
@@ -53,7 +54,7 @@ public class S3ServiceImpl implements S3Service {
         try {
             fileToUpload = convertMultiPartFileToFile(multipartFile);
             return this.s3TransferManager.upload(this.bucketName, multipartFile.getOriginalFilename(), fileToUpload).waitForUploadResult();
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         } finally {
             if (fileToUpload != null) {
